@@ -33,8 +33,9 @@ instance : Topology.Metric X where
         simp [h₂]
       · by_cases h₃ : x = z
         · simp [h₃]
-        · push_neg at h₁
-          sorry
+        · push_neg at h₁ h₂ h₃
+          rw [if_neg h₁, if_neg h₂.symm, if_neg h₃]
+          linarith
   dist_eq := by
     intro x y h
     simp at h

@@ -1,7 +1,7 @@
 import MyLean.Topology
 import Mathlib.Data.Real.Basic
 
-open Topology
+open Topology Set
 
 namespace test
 
