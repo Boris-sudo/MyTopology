@@ -62,4 +62,12 @@ instance : Topology.Metric ℝ where
     rw [sub_eq_zero] at h
     exact h
 
+variable {α : Type} [Metric α] (x y a : α) (s : Set α)
+
+example (x a : α) (r : ℝ) (h : r > dist x a) :ball x (r - dist x a) ⊆ ball a r := by
+  intro y hy
+  simp only [mem_ball] at hy ⊢
+  apply lt_sub_iff_add_lt.1 at hy
+  exact lt_of_le_of_lt (Topology.dist_triangle y a x) hy
+
 end test
