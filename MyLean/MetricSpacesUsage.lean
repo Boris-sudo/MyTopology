@@ -1,6 +1,6 @@
-import MyLean.MetricSpaces
+import MyLean.MetricSpaces.Diam
 
-open Topology
+open Topology Diam
 
 namespace test
 
@@ -62,12 +62,34 @@ instance : Topology.Metric ℝ where
     rw [sub_eq_zero] at h
     exact h
 
-variable {α : Type} [Metric α] (x y a : α) (s : Set α)
+variable {α : Type} [Metric α]
 
-example (x a : α) (r : ℝ) (h : r > dist x a) :ball x (r - dist x a) ⊆ ball a r := by
+example (x a : α) (r : ℝ) (h : r > dist x a) : ball x (r - dist x a) ⊆ ball a r := by
   intro y hy
   simp only [mem_ball] at hy ⊢
   apply lt_sub_iff_add_lt.1 at hy
   exact lt_of_le_of_lt (Topology.dist_triangle y a x) hy
+
+example (s : Set α) (h : s.Nonempty) : isLimited s ↔ ∃ r : ℝ, ∃ x ∈ s, s ⊆ ball x r := by
+  rw [isLimited]
+  constructor
+  · rintro ⟨d, hd⟩
+    use d
+    obtain ⟨x, hx⟩ := h
+    use x
+    constructor
+    · exact hx
+    · intro p hp
+      rw [mem_ball]
+      exact hd p hp x hx
+  · rintro ⟨d, c, hc, hs⟩
+    use 2 * d
+    intro x hx y hy
+    have hxb : x ∈ ball c d := hs hx
+    have hyb : y ∈ ball c d := hs hy
+    rw [mem_ball'] at hyb
+    rw [mem_ball] at hxb
+    have := Topology.dist_triangle x y c
+    linarith [hxb, hyb, this]
 
 end test

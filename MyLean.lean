@@ -1,3 +1,4 @@
 import MyLean.Docs
 import MyLean.Topology
-import MyLean.MetricSpaces
+import MyLean.MetricSpaces.Basic
+import MyLean.MetricSpaces.Diam

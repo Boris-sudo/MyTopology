@@ -1,7 +1,6 @@
 import Mathlib.Data.Real.Basic
 import Mathlib.Tactic
 
-
 namespace Topology
 
 variable {α : Type} {s₁ t₁ s₂ t₂ : Set α}
@@ -79,7 +78,7 @@ theorem dist_nonneg {x y : α} : 0 ≤ dist x y :=
 /-
   ### Balls
 -/
-variable {x y z : α} {δ ε ε₁ ε₂ : ℝ} {s : Set α}
+variable {x y z : α} {δ ε ε₁ ε₂ : ℝ}
 
 def ball (x : α) (ε : ℝ) : Set α := { y | dist y x < ε }
 

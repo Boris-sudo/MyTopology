@@ -29,3 +29,6 @@ example (h : r < dist x y) : ball x (dist x y - r) ∩ ball y r = ∅ := by
     exact not_le_of_gt h' this
   · intro h
     simp at h
+
+
+example (s:Set α) : diam s
